@@ -33,7 +33,7 @@ public class TrainingTest {
         @Test
         void testGenerateFibonacciWithCoupleTerms() {
             int[] result = training.generateFibonacci(7);
-            assertEquals(5, result.length);
+            assertEquals(7, result.length);
             assertEquals(0, result[0]);
             assertEquals(1, result[1]);
             assertEquals(1, result[2]);
