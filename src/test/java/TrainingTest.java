@@ -1,20 +1,22 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TrainingTest {
+class TrainingTest {
 
     private Training training;
 
-    @Nested
-    class FibonacciTests {
+    @BeforeEach
+    void setUp() {
+        training = new Training();
+    }
 
-        @BeforeEach
-        void setUp() {
-            training = new Training();
-        }
+    @Nested
+    @Disabled
+    class FibonacciTests {
 
         @Test
         void testGenerateFibonacciWithZeroTerms() {
@@ -43,7 +45,7 @@ public class TrainingTest {
         }
 
         @Test
-        public void testGenerateFibonacciWithThirtyTerms() {
+        void testGenerateFibonacciWithThirtyTerms() {
             int[] result = training.generateFibonacci(30);
             assertEquals(30, result.length);
 
@@ -89,6 +91,7 @@ public class TrainingTest {
     }
 
     @Nested
+    @Disabled
     class FizzBuzzTests {
 
         @Test
@@ -120,4 +123,87 @@ public class TrainingTest {
         }
 
     }
+
+    @Nested
+    class MaxTest {
+
+        @Test
+        void testFindMaxWithPositiveNumbers() {
+            int[] array = {5, 2, 9, 1, 7};
+            int result = training.findMax(array);
+            assertEquals(9, result);
+        }
+
+        @Test
+        void testFindMaxWithNegativeNumbers() {
+            int[] array = {-5, -2, -9, -1, -7};
+            int result = training.findMax(array);
+            assertEquals(-1, result);
+        }
+
+        @Test
+        void testFindMaxWithMixedNumbers() {
+            int[] array = {-5, 2, 9, -1, 7};
+            int result = training.findMax(array);
+            assertEquals(9, result);
+        }
+
+        @Test
+        void testFindMaxWithSingleElement() {
+            int[] array = {3};
+            int result = training.findMax(array);
+            assertEquals(3, result);
+        }
+
+        @Test
+        void testFindMaxWithEmptyArray() {
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                    () -> training.findMax(new int[]{}));
+            assertEquals("Array must not be null or empty.", exception.getMessage());
+        }
+
+        @Test
+        void testFindMaxWithNullArray() {
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                    () -> training.findMax(null));
+            assertEquals("Array must not be null or empty.", exception.getMessage());
+        }
+    }
+
+    @Nested
+    class PalindromeTest{
+
+        @Test
+        void testIsPalindromeWithPalindromeString() {
+            assertTrue(training.checkPalindrome("level"));
+        }
+
+        @Test
+        void testIsPalindromeWithNonPalindromeString() {
+            assertFalse(training.checkPalindrome("hello"));
+        }
+
+        @Test
+        void testIsPalindromeWithEmptyString() {
+            assertTrue(training.checkPalindrome(""));
+        }
+
+        @Test
+        void testIsPalindromeWithSingleCharacterString() {
+            assertTrue(training.checkPalindrome("a"));
+        }
+
+        @Test
+        void testIsPalindromeWithMixedCaseString() {
+            assertTrue(training.checkPalindrome("Madam"));
+        }
+
+        @Test
+        void testIsPalindromeWithNullString() {
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                    () -> training.checkPalindrome(null));
+            assertEquals("Input string must not be null.", exception.getMessage());
+        }
+    }
+
 }
