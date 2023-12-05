@@ -2,8 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TrainingTest {
 
@@ -87,5 +86,38 @@ public class TrainingTest {
                     () -> training.generateFibonacci(-3));
             assertEquals("Number of terms should be greater than zero.", exception.getMessage());
         }
+    }
+
+    @Nested
+    class FizzBuzzTests {
+
+        @Test
+        void testFizzBuzzWithFive() {
+            String[] result = training.fizzBuzz(5);
+            assertArrayEquals(new String[]{"1", "2", "Fizz", "4", "Buzz"}, result);
+        }
+
+        @Test
+        void testFizzBuzzWithFifteen() {
+            String[] result = training.fizzBuzz(15);
+            assertArrayEquals(new String[]{
+                    "1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz",
+                    "11", "Fizz", "13", "14", "FizzBuzz"
+            }, result);
+        }
+
+        @Test
+        void testFizzBuzzWithOne() {
+            String[] result = training.fizzBuzz(1);
+            assertArrayEquals(new String[]{"1"}, result);
+        }
+
+        @Test
+        void testFizzBuzzWithNegativeInput() {
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                    () -> training.fizzBuzz(-3));
+            assertEquals("Input should be a positive integer.", exception.getMessage());
+        }
+
     }
 }
