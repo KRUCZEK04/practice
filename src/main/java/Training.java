@@ -23,6 +23,22 @@ public class Training {
      * @return n or Fizz or Buzz or FizzBuzz on specific array index
      */
     public String[] fizzBuzz(int n){
-        return null;
+        if(n <= 0){
+            throw new IllegalArgumentException("Input should be a positive integer.");
+        }
+        String[] numbers = new String[n];
+        for (int i = 1; i <= n; i++) {
+            if (i%3 ==0 && i%5==0){
+                numbers[i-1] = "FizzBuzz";
+            }
+            else if (i%3 ==0){
+                numbers[i-1] = "Fizz";
+            }
+            else if (i%5 ==0){
+                numbers[i-1] = "Buzz";
+            }
+           else numbers[i-1] = Integer.toString(i);
+        }
+        return  numbers;
     }
 }
