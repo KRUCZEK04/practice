@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.OptionalInt;
+
 public class Training {
 
     /**
@@ -31,10 +34,24 @@ public class Training {
      * @param array to find in
      * @return max number
      */
-    public int findMax(int[] array) {
-        return 0;
-    }
+        public int findMax(int[] array) {
+            if (array == null) {
+                throw new IllegalArgumentException("Array must not be null or empty.");
+            }
 
+            if (array.length == 0) {
+                throw new IllegalArgumentException("Array must not be null or empty.");
+            }
+                int maxNumber = array[0];
+                for (int i = 1; i < array.length; i++) {
+                    if (array[i] > maxNumber) {
+                        maxNumber = array[i];
+                    }
+                }
+
+                return maxNumber;
+
+        }
     /**
      * A palindrome is a sequence of characters that reads the same forward as backward.
      * Palindrome: level, kayak, radar
@@ -43,6 +60,23 @@ public class Training {
      * @return true if word is a palindrome, false if not
      */
     public boolean checkPalindrome(String word) {
-        return false;
+            if (word == null){
+                throw new IllegalArgumentException("Input string must not be null.");
+            }
+        String newString = word.replaceAll("\\s+", "").toLowerCase();
+
+        // Porównanie znaków od początku i końca
+        int start = 0;
+        int end = newString.length() - 1;
+
+        while (start < end) {
+            if (newString.charAt(start) != newString.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+
+        return true;
     }
 }
