@@ -65,7 +65,6 @@ public class Training {
             }
         String newString = word.replaceAll("\\s+", "").toLowerCase();
 
-        // Porównanie znaków od początku i końca
         int start = 0;
         int end = newString.length() - 1;
 
